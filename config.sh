@@ -5,13 +5,17 @@
 
 # Lists to be processed
 # Currently available options are: manuale aams tabacchi agcom cncpo consob
-LISTS="manuale aams tabacchi agcom cncpo"
+LISTS="manuale aams tabacchi agcom"
+
+# Local work directories
+LISTS_DIR='./lists'
+TMP_DIR='./tmp'
 
 # CNCPO URL
 URL_cncpo='https://212.14.145.50/'
 
 # Local File for CNCPO
-FILE_cncpo='tmp/blacklist.csv'
+FILE_cncpo="$TMP_DIR/blacklist.csv"
 
 # Local File for AGCOM
 # To be manyally updated from https://www.agcom.it/provvedimenti-a-tutela-del-diritto-d-autore
@@ -38,7 +42,7 @@ CURL_OPTS_cncpo="$CERTS_cncpo"
 CURL_OPTS_aams=''
 
 # path of the file on each remote target DNS server
-CONFFILE='/etc/bind/censura/named.conf'
+CONFFILE='/etc/named/censura/named.conf'
 
 # list of target DNS servers
 SERVERS='root@ns1.example.net root@ns3.example.net root@ns5.example.net root@ns6.example.net'
@@ -47,10 +51,10 @@ SERVERS='root@ns1.example.net root@ns3.example.net root@ns5.example.net root@ns6
 RSYNC_OPTIONS='--timeout=30 -rt'
 
 # the local file
-CONF='lists/named.conf'
+CONF="$LISTS_DIR/named.conf"
 
 # the directory on the name servers containing the zone files
-CONFDIR='/etc/bind/censura'
+CONFDIR='/etc/named/censura'
 
 ############ Blackholing
 
@@ -67,7 +71,8 @@ BLACKHOLE_NEXTHOP='192.168.254.254'
 LOGGING_ENABLE=true
 
 # Logfile path
-LOGFILE='/var/log/kit-censura.log'
+LOG_DIR='./log'
+LOGFILE="$LOG_DIR/kit-censura.log"
 
 
 ########### Alerting 
@@ -77,4 +82,4 @@ ALERT_ENABLE=true
 # insert NOC email to enable alerting
 NOC_EMAIL=''
 # sender address
-FROM_EMAIL='cncpo@connesi.it'
+FROM_EMAIL='cncpo@optimaitalia.com'
