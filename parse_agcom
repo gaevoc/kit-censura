@@ -60,16 +60,15 @@ sub parse_agcom_file {
 
 		# skip empty lines
 		next if /^$/;
-
 		# look for a line containing an incremental number and a date
 		if ($state == 0) {
 			($number, $date_y, $date_m, $date_d) = /^
 				\s*
 				(\d+)					# incremental number
 				[\s_]+
-				(20[12]\d)   [\.:-]+	# year
-				(0\d|1[012]) [\.:-]+	# month
-				([012]\d|3[01])			# day
+				(20[12]\d)[\.:-]+	# year
+				([012]\d|3[01])[\.:-]+	# day
+				(0\d|1[012]) 	# month
 				\s*
 			$/x;
 
