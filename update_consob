@@ -4,16 +4,16 @@ source config.sh
 
 
 if [ -e "$FILE_consob" ]; then
-  egrep '^[^#]' $FILE_consob | sed 's~http[s]*://~~g' | sort | uniq > lists/consob.new.tmp
-  mv lists/consob.new.tmp lists/consob.new
+  egrep '^[^#]' $FILE_consob | sed 's~http[s]*://~~g' | sort | uniq > $LISTS_DIR/consob.new.tmp
+  mv $LISTS_DIR/consob.new.tmp $LISTS_DIR/consob.new
    test $LOGGING_ENABLE == true && echo "$(date '+%d/%m/%y %H:%m:%S') - Imported list of IP  $FILE_consob" >> $LOGFILE
-elif [ ! -e lists/consob.new ]; then
-  : > lists/consob.new
+elif [ ! -e $LISTS_DIR/consob.new ]; then
+  : > $LISTS_DIR/consob.new
 fi
 
 # allow manual add of specific IPs if file exists (ex lista.consob-ip)
   if [ -e $FILE_consob-ip ]; then
-        egrep '^[^#]' $FILE_consob-ip | sort | uniq > lists/consob-ip
+        egrep '^[^#]' $FILE_consob-ip | sort | uniq > $LISTS_DIR/consob-ip
 	test $LOGGING_ENABLE == true && echo "$(date '+%d/%m/%y %H:%m:%S') - Imported list of IP  $FILE_consob-ip" >> $LOGFILE
   fi
 

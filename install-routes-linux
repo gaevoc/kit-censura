@@ -27,7 +27,7 @@ list_routes() {
 list_routes $BLACKHOLE_NEXTHOP | sort > tmp/routes.installed
 
 for list in $LISTS; do
-  test -e lists/${list}-ip && grep '^[^#]' lists/${list}-ip
+  test -e $LISTS_DIR/${list}-ip && grep '^[^#]' $LISTS_DIR/${list}-ip
 done | sort | uniq > tmp/routes.new
 
 comm -13 tmp/routes.installed tmp/routes.new > tmp/routes.added

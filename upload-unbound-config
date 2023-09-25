@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+source config.sh
+
 # path of the file on each target server
 CONFFILE='/etc/unbound/censura-new.conf'
 # list of target servers
@@ -8,7 +10,7 @@ SERVERS='root@ns1.example.net root@ns3.example.net root@ns5.example.net root@ns6
 RSYNC_OPTIONS='--timeout=30 -rt'
 
 # the local file
-CONF='lists/unbound.conf'
+CONF='$LISTS_DIR/unbound.conf'
 
 # override the list of target servers
 if [ "$1" ]; then

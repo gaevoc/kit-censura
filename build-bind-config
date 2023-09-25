@@ -15,7 +15,7 @@ list2namedconf() {
   local list="$1"
 
   local name
-  for name in $(grep '^[^#]' lists/$list); do
+  for name in $(grep '^[^#]' $LISTS_DIR/$list); do
     echo "zone \"$name\" { type master; file \"$CONFDIR/db.$list\"; };"
   done
 }

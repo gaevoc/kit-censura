@@ -1,11 +1,13 @@
-#!/bin/sh -e
+#!/bin/bash
+
+source config.sh
 
 if [ -z "$1" ]; then
   echo "Usage: $0 \"LISTS\"" >&2
 fi
 LISTS="$1"
 
-CONF='lists/unbound.conf'
+CONF="$LISTS_DIR/unbound.conf"
 
 ##############################################################################
 list2unboundconf() {
@@ -14,11 +16,11 @@ list2unboundconf() {
 
   local name
   if [ "$ipredir" ]; then
-    for name in $(grep '^[^#]' lists/$list); do
+    for name in $(grep '^[^#]' $LISTS_DIR/$list); do
       printf "\tlocal-data: \"$name A $ipredir\"\n"
     done
   else
-    for name in $(grep '^[^#]' lists/$list); do
+    for name in $(grep '^[^#]' $LISTS_DIR/$list); do
       printf "\tlocal-zone: \"$name\" static\n"
     done
   fi
