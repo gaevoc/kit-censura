@@ -5,8 +5,11 @@
 
 source config.sh
 
-test $LOGGING_ENABLE == true && echo "$(date '+%d/%m/%y %H:%m:%S') - Censorship GET started." >> $LOGFILE  
+if [ ! -d "$TMP_DIR" ] ; then mkdir "$TMP_DIR" ; fi
+if [ ! -d "$LISTS_DIR" ] ; then mkdir "$LISTS_DIR" ; fi
+if [ ! -d "$LOG_DIR" ] ; then mkdir "$LOG_DIR" ; fi
 
+test $LOGGING_ENABLE == true && echo "$(date '+%d/%m/%y %H:%m:%S') - Censorship GET started." >> $LOGFILE  
 
 if [ "$1" ]; then
   LISTS="$1"  
@@ -25,19 +28,19 @@ for list in $LISTS; do
   fi
 
   # second sanity check
-  if [ ! -e lists/$list.new ]; then
-    echo "WARNING: lists/$list.new has not been created!" >&2
-    test $LOGGING_ENABLE == true && echo "$(date '+%d/%m/%y %H:%m:%S') - WARNING: lists/$list.new has not been created!" >> $LOGFILE
+  if [ ! -e $LISTS_DIR/$list.new ]; then
+    echo "WARNING: $LISTS_DIR/$list.new has not been created!" >&2
+    test $LOGGING_ENABLE == true && echo "$(date '+%d/%m/%y %H:%m:%S') - WARNING: $LISTS_DIR/$list.new has not been created!" >> $LOGFILE
     continue
   fi
 
-  mv lists/$list.new lists/$list
+  mv $LISTS_DIR/$list.new $LISTS_DIR/$list
 
   # The by-IP list is generated only by some sources. The program assumes
   # that if the by-name list was generated correctly then this one will
   # have been too.
-  if [ -e lists/$list-ip.new ]; then
-    mv lists/$list-ip.new lists/$list-ip
+  if [ -e $LISTS_DIR/$list-ip.new ]; then
+    mv $LISTS_DIR/$list-ip.new $LISTS_DIR/$list-ip
   fi
   
   
