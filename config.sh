@@ -45,7 +45,7 @@ CURL_OPTS_aams=''
 CONFFILE='/etc/named/censura/named.conf'
 
 # list of target DNS servers
-SERVERS='root@ns1.example.net root@ns3.example.net root@ns5.example.net root@ns6.example.net'
+SERVERS='root@172.16.91.154'
 
 # do not waste too much time trying to connect to unresponsive remote servers
 RSYNC_OPTIONS='--timeout=30 -rt'
