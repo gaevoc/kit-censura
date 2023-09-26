@@ -5,7 +5,7 @@
 
 # Lists to be processed
 # Currently available options are: manuale aams tabacchi agcom cncpo consob
-LISTS="manuale aams tabacchi agcom"
+LISTS="manuale aams tabacchi agcom cncpo"
 
 # Local work directories
 LISTS_DIR='./lists'
@@ -36,7 +36,7 @@ FILE_manuale='lista.manuale'
 CERTS_cncpo='--cert cncpo.pem --key cncpo.key --cacert cncpo-ca.pem'
 
 # curl options for cncpo
-CURL_OPTS_cncpo="$CERTS_cncpo"
+CURL_OPTS_cncpo="--http1.1 $CERTS_cncpo"
 
 # curl options for aams
 CURL_OPTS_aams=''
