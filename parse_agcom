@@ -128,7 +128,12 @@ sub remove_subdomains {
 		# remove each leading component of the domain and check if the new
 		# resulting domain is in our list
 		while ($domain =~ s/^.+?\.(.+\..+)$/$1/) {
-			delete $list->[$i] if exists $domains{$domain};
+			if (exists $domains{$domain}) {
+                #warn "Removing $list->[$i] because $domain is already in list\n";
+                delete $list->[$i];
+                last;
+            }
+			#		delete $list->[$i] if exists $domains{$domain};
 		}
 	}
 
