@@ -1,0 +1,10 @@
+#!/bin/bash
+# Documented on:
+# https://www1.agenziadoganemonopoli.gov.it/siti_inibiti_tabacchi.htm
+
+source common_adm.sh
+
+URL_adm="https://www.adm.gov.it/portale/siti-web-inibiti-giochi"
+
+download_adm 'giochi' $LISTS_DIR/giochi.new
+
